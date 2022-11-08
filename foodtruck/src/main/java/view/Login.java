@@ -2,6 +2,7 @@ package view;
 
 import java.util.Scanner;
 
+import controller.UsuarioController;
 import model.vo.UsuarioVO;
 
 public class Login {
@@ -37,8 +38,26 @@ public class Login {
 	}
 	
 	private UsuarioVO realizarLogin() {
-		// TODO Auto-generated method stub
-		return null;
+		UsuarioVO usuarioVO = new UsuarioVO();
+		System.out.println("---------- Informações ----------");
+		System.out.print("Login: ");
+		usuarioVO.setLogin(teclado.nextLine());
+		System.out.print("Senha: ");
+		usuarioVO.setSenha(teclado.nextLine());
+		
+		if (usuarioVO.getLogin().isEmpty() || usuarioVO.getSenha().isEmpty()) {
+			System.out.println("Os campos de Login e Senha são obrigatórios!");
+		} else {
+			UsuarioController usuarioController = new UsuarioController();
+			usuarioVO = usuarioController.realizarLoginController(usuarioVO);
+			if(usuarioVO.getIdUsuario() == 0) {
+				System.out.println("Usuário não encontrado!");
+			} if(usuarioVO.getDataExpiracao() != null) {
+				System.out.println("Usuário Expirado!");
+			}
+		}
+		
+		return usuarioVO;
 	}
 
 	private int apresentarOpcoesMenu() {

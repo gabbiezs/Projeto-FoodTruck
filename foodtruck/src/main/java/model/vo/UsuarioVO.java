@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 public class UsuarioVO {
 	
 	private int idUsuario;
-	private TipoUsuarioVo tipoUsuario;
+	private TipoUsuarioVO tipoUsuario;
 	private String nome;
 	private String cpf;
 	private String email;
@@ -15,7 +15,7 @@ public class UsuarioVO {
 	private String login;
 	private String senha;
 	
-	public UsuarioVO(int idUsuario, TipoUsuarioVo tipoUsuario, String nome, String cpf, String email, String telefone,
+	public UsuarioVO(int idUsuario, TipoUsuarioVO tipoUsuario, String nome, String cpf, String email, String telefone,
 			LocalDateTime dataCadastro, LocalDateTime dataExpiracao, String login, String senha) {
 		super();
 		this.idUsuario = idUsuario;
@@ -42,11 +42,11 @@ public class UsuarioVO {
 		this.idUsuario = idUsuario;
 	}
 
-	public TipoUsuarioVo getTipoUsuario() {
+	public TipoUsuarioVO getTipoUsuario() {
 		return tipoUsuario;
 	}
 
-	public void setTipoUsuario(TipoUsuarioVo tipoUsuario) {
+	public void setTipoUsuario(TipoUsuarioVO tipoUsuario) {
 		this.tipoUsuario = tipoUsuario;
 	}
 
