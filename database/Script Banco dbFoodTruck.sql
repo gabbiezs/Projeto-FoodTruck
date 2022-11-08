@@ -93,15 +93,15 @@ INSERT INTO SITUACAOENTREGA (descricao) VALUES ('PEDIDO_ENTREGUE');
 
 
 INSERT INTO USUARIO (idtipousuario, nome, cpf, email, telefone, datacadastro, dataexpiracao, login, senha) 
-VALUES (1, 'Adriano de Melo', '01234567890', 'adriano@gmail.com', '91111-6666', '2022-10-01', null, 'adriano', 'adriano');
+VALUES (1, 'Luis Alberto', '01234567890', 'beto@gmail.com', '91111-6666', '2022-10-01', null, 'luis', 'luis');
 INSERT INTO USUARIO (idtipousuario, nome, cpf, email, telefone, datacadastro, dataexpiracao, login, senha) 
-VALUES (2, 'Jessica Melo', '09876543210', 'jessica@gmail.com', '91111-7777', '2022-10-01', null, 'cliente', 'cliente');
+VALUES (2, 'Gabriel  Miguel', '09876543210', 'gabriel@gmail.com', '91111-7777', '2022-10-01', null, 'cliente', 'cliente');
 INSERT INTO USUARIO (idtipousuario, nome, cpf, email, telefone, datacadastro, dataexpiracao, login, senha) 
-VALUES (3, 'Bruna Melo', '09876453210', 'bruna@gmail.com', '91111-8888', '2022-10-01', null, 'func', 'func');
+VALUES (3, 'Gabriela Zanon', '09876453210', 'gabriela@gmail.com', '91111-8888', '2022-10-01', null, 'func', 'func');
 INSERT INTO USUARIO (idtipousuario, nome, cpf, email, telefone, datacadastro, dataexpiracao, login, senha) 
-VALUES (4, 'Roberto Melo', '09873456210', 'roberto@gmail.com', '91111-9999', '2022-10-01', null, 'entregador', 'entregador');
+VALUES (4, 'Renan Leal', '09873456210', 'renan@gmail.com', '91111-9999', '2022-10-01', null, 'entregador', 'entregador');
 INSERT INTO USUARIO (idtipousuario, nome, cpf, email, telefone, datacadastro, dataexpiracao, login, senha) 
-VALUES (4, 'Fernanda Melo', '09875634210', 'fernanda@gmail.com', '92222-9999', '2022-10-01', null, 'entregador', 'entregador');
+VALUES (4, 'Barbara Luersen', '09875634210', 'barbara@gmail.com', '92222-9999', '2022-10-01', null, 'entregador', 'entregador');
 
 INSERT INTO PRODUTO (idtipoproduto, nome, preco, datacadastro, dataexclusao) VALUES (1, 'Pizza', 50.00, '2022-10-01', null);
 INSERT INTO PRODUTO (idtipoproduto, nome, preco, datacadastro, dataexclusao) VALUES (2, 'Coca-Cola', 7.00, '2022-10-01', null);
