@@ -9,11 +9,11 @@ public class VendaVO {
 	private int numeroPedido;
 	private LocalDateTime dataVenda;
 	private LocalDateTime dataCancelamento;
-	private char flagEntrega;
+	private boolean flagEntrega;
 	private double taxaEntrega;
 	
 	public VendaVO(int idVenda, UsuarioVO idUsuario, int numeroPedido, LocalDateTime dataVenda,
-			LocalDateTime dataCancelamento, char flagEntrega, double taxaEntrega) {
+			LocalDateTime dataCancelamento, boolean flagEntrega, double taxaEntrega) {
 		super();
 		this.idVenda = idVenda;
 		this.idUsuario = idUsuario;
@@ -68,11 +68,11 @@ public class VendaVO {
 		this.dataCancelamento = dataCancelamento;
 	}
 
-	public char getFlagEntrega() {
+	public boolean getFlagEntrega() {
 		return flagEntrega;
 	}
 
-	public void setFlagEntrega(char flagEntrega) {
+	public void setFlagEntrega(boolean flagEntrega) {
 		this.flagEntrega = flagEntrega;
 	}
 
