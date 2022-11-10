@@ -3,6 +3,7 @@ package view;
 import java.util.Scanner;
 
 import controller.UsuarioController;
+import model.vo.TipoUsuarioVO;
 import model.vo.UsuarioVO;
 
 public class Login {
@@ -22,11 +23,13 @@ public class Login {
 					if (usuarioVO.getIdUsuario() != 0 && usuarioVO.getDataExpiracao() == null) {
 						System.out.println("\nUsuário Logado: " + usuarioVO.getLogin());
 						System.out.println("Perfil: " + usuarioVO.getTipoUsuario());
+						Menu menu = new Menu();
+						menu.apresentarMenu(usuarioVO);
 					}
 					break;
 				}
 				case OPCAO_MENU_CRIAR_CONTA: {
-					System.out.println("Criando uma conta...");
+					this.cadastrarNovoUsuario();
 					break;
 				}
 				default: {
@@ -36,7 +39,7 @@ public class Login {
 			opcao = this.apresentarOpcoesMenu();
 		}
 	}
-	
+
 	private UsuarioVO realizarLogin() {
 		UsuarioVO usuarioVO = new UsuarioVO();
 		System.out.println("---------- Informações ----------");
@@ -69,5 +72,13 @@ public class Login {
 		System.out.println("\nDigite uma opção: ");
 		
 		return Integer.parseInt(teclado.nextLine());
+	}
+	
+	private void cadastrarNovoUsuario() {
+		UsuarioVO usuarioVO = new UsuarioVO();
+		usuarioVO.setTipoUsuario(TipoUsuarioVO.CLIENTE);
+		
+		MenuUsuario menuUsuario = new MenuUsuario();
+		menuUsuario.cadastrarNovoUsuario(usuarioVO);
 	}
 }
