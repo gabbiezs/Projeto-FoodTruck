@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 import model.vo.TipoUsuarioVO;
 import model.vo.UsuarioVO;
@@ -50,6 +51,21 @@ public class UsuarioDAO {
 		}
 		
 		return usuarioVO;
+	}
+
+	public ArrayList<TipoUsuarioVO> consultarTipoUsuarioDAO() {
+		
+		return null;
+	}
+
+	public boolean verificarExistenciaRegistroPorCpfDAO(UsuarioVO usuarioVO) {
+		
+		return false;
+	}
+
+	public UsuarioVO cadastrarUsuarioDAO(UsuarioVO usuarioVO) {
+		
+		return null;
 	}
 
 }

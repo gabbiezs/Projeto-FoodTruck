@@ -43,7 +43,7 @@ public class Menu {
 				case OPCAO_MENU_USUARIO:{
 					if (usuarioVO.getTipoUsuario().equals(TipoUsuarioVO.ADMINISTRADOR)) {
 						MenuUsuario menuUsuario = new MenuUsuario();
-						menuUsuario.apresentarMenuUsuario(usuarioVO);
+						menuUsuario.apresentarMenuUsuario();
 					}
 					break;
 				}

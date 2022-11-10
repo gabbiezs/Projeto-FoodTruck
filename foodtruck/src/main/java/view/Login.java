@@ -69,7 +69,7 @@ public class Login {
 		System.out.println(OPCAO_MENU_LOGIN + " - Entrar");
 		System.out.println(OPCAO_MENU_CRIAR_CONTA + " - Criar conta");
 		System.out.println(OPCAO_MENU_SAIR + " - Sair");
-		System.out.println("\nDigite uma opção: ");
+		System.out.print("\nDigite uma opção: ");
 		
 		return Integer.parseInt(teclado.nextLine());
 	}
