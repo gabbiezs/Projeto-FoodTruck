@@ -21,7 +21,7 @@ public class Menu {
 			switch(opcao) {
 				case OPCAO_MENU_VENDA:{
 					MenuVenda menuVenda = new MenuVenda();
-					menuVenda.apresentarMenuVenda(usuarioVO);
+					menuVenda.apresentarMenuVenda();
 					break;
 				}
 				case OPCAO_MENU_PRODUTO:{

@@ -9,5 +9,4 @@ public class Executavel {
 		Login login = new Login();
 		login.apresentarMenuLogin();
 	}
-
 }

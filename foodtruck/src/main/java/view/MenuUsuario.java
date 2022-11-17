@@ -1,6 +1,7 @@
 package view;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -78,16 +79,16 @@ public class MenuUsuario {
 		}
 		System.out.print("\nDigite o nome: ");
 		usuarioVO.setNome(teclado.nextLine());
-		System.out.print("\nDigite o CPF: ");
+		System.out.print("Digite o CPF: ");
 		usuarioVO.setCpf(teclado.nextLine());
-		System.out.print("\nDigite o e-mail: ");
+		System.out.print("Digite o e-mail: ");
 		usuarioVO.setEmail(teclado.nextLine());
-		System.out.print("\nDigite o telefone: ");
+		System.out.print("Digite o telefone: ");
 		usuarioVO.setTelefone(teclado.nextLine());
 		usuarioVO.setDataCadastro(LocalDateTime.now());
-		System.out.print("\nDigite o Login: ");
+		System.out.print("Digite o Login: ");
 		usuarioVO.setLogin(teclado.nextLine());
-		System.out.print("\nDigite a Senha: ");
+		System.out.print("Digite a Senha: ");
 		usuarioVO.setSenha(teclado.nextLine());
 		
 		if (this.validarCamposCadastro(usuarioVO)) {
@@ -148,14 +149,60 @@ public class MenuUsuario {
 	}
 
 	private void consultarUsuario() {
-		System.out.println("Consultando o usuário...");
+		
 	}
 
 	private void atualizarUsuario() {
-		System.out.println("Atualizando o usuário...");
+		UsuarioVO usuarioVO = new UsuarioVO();
+		System.out.print("\nInforme o código do usuário: ");
+		usuarioVO.setIdUsuario(Integer.parseInt(teclado.nextLine()));
+		if (usuarioVO.getTipoUsuario() == null) {
+			do {
+				usuarioVO.setTipoUsuario(TipoUsuarioVO.getTipoUsuarioVOPorValor(this.apresentarOpcoesTipoUsuario()));
+			} while(usuarioVO.getTipoUsuario() == null);
+		}
+		System.out.print("\nDigite o nome: ");
+		usuarioVO.setNome(teclado.nextLine());
+		System.out.print("Digite o CPF: ");
+		usuarioVO.setCpf(teclado.nextLine());
+		System.out.print("Digite o e-mail: ");
+		usuarioVO.setEmail(teclado.nextLine());
+		System.out.print("Digite o telefone: ");
+		usuarioVO.setTelefone(teclado.nextLine());
+		usuarioVO.setDataCadastro(LocalDateTime.now());
+		System.out.print("Digite o Login: ");
+		usuarioVO.setLogin(teclado.nextLine());
+		System.out.print("Digite a Senha: ");
+		usuarioVO.setSenha(teclado.nextLine());
+		
+		if (this.validarCamposCadastro(usuarioVO)) {
+			UsuarioController usuarioController = new UsuarioController();
+			boolean resultado = usuarioController.atualizarUsuarioController(usuarioVO);
+			if (resultado) {
+				System.out.println("Usuário atualizado com sucesso!");
+			} else {
+				System.out.println("Não foi possível atualizar o usuário!");
+			}
+		}
 	}
 
 	private void excluirUsuario() {
-		System.out.println("Excluindo o usuário...");
+		UsuarioVO usuarioVO = new UsuarioVO();
+		System.out.print("\nInforme o código do usuário: ");
+		usuarioVO.setIdUsuario(Integer.parseInt(teclado.nextLine()));
+		System.out.print("Digite a data de expiração no formato dd/MM/yyyy HH:mm:ss : ");
+		usuarioVO.setDataExpiracao(LocalDateTime.parse(teclado.nextLine(), 
+				DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")));
+		if(usuarioVO.getIdUsuario() == 0 || usuarioVO.getDataExpiracao() == null) {
+			System.out.println("Os campos código do usuário e data de expiração são obrigatórios!");
+		} else {
+			UsuarioController usuarioController = new UsuarioController();
+			boolean resultado = usuarioController.excluirUsuarioController(usuarioVO);
+			if (resultado) {
+				System.out.println("\nUsuário excluído com sucesso!");
+			} else {
+				System.out.println("\nNão foi possível excluir o usuário!");
+			}
+		}
 	}
 }

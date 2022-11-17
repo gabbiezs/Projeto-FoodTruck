@@ -56,8 +56,6 @@ public class MenuVenda {
 
 		System.out.print("\nDigite id da venda: ");
 		vendaVO.setIdVenda(teclado.nextInt());
-		System.out.print("\nDigite id do usuario: ");
-		vendaVO.setIdUsuario(teclado.nextInt());
 		System.out.print("\nDigite o numero do pedido: ");
 		vendaVO.setNumeroPedido(teclado.nextInt());
 		System.out.print("\nDigite a data da venda: ");
