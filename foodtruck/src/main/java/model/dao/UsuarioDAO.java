@@ -54,7 +54,25 @@ public class UsuarioDAO {
 	}
 
 	public ArrayList<TipoUsuarioVO> consultarTipoUsuarioDAO() {
-		
+		Connection conn = Banco.getConnection();
+		Statement stmt = Banco.getStatement(conn);
+		ResultSet resultado = null;
+		ArrayList<TipoUsuarioVO> listaTipoUsuarioVO = new ArrayList<TipoUsuarioVO>();
+		String querry = "SELECT descricao FROM tipousuario";
+		try {
+			resultado = stmt.executeQuery(querry);
+			while(resultado.next()){
+				TipoUsuarioVO tipoUsuarioVO = TipoUsuarioVO.valueOf(resultado.getString(1));
+				listaTipoUsuarioVO.add(tipoUsuarioVO);
+			}
+		} catch (SQLException erro) {
+			System.out.println("Erro ao executar a query do método consultarTipoUsuarioDAO.");
+			System.out.println("Erro: " + erro.getMessage());
+		} finally {
+			Banco.closeResultSet(resultado);
+			Banco.closeStatement(stmt);
+			Banco.closeConnection(conn);
+		}
 		return null;
 	}
 
