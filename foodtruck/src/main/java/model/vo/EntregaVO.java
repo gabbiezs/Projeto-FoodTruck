@@ -5,12 +5,12 @@ import java.time.LocalDateTime;
 public class EntregaVO {
 
 	private int idEntrega;
-	private VendaVO idVenda;
-	private UsuarioVO idEntregador;
+	private int idVenda;
+	private int idEntregador;
 	private SituacaoEntregaVO idSituacaoEntrega;
 	private LocalDateTime dataEntrega;
 	
-	public EntregaVO(int idEntrega, VendaVO idVenda, UsuarioVO idEntregador, SituacaoEntregaVO idSituacaoEntrega,
+	public EntregaVO(int idEntrega, int idVenda, int idEntregador, SituacaoEntregaVO idSituacaoEntrega,
 			LocalDateTime dataEntrega) {
 		super();
 		this.idEntrega = idEntrega;
@@ -32,19 +32,19 @@ public class EntregaVO {
 		this.idEntrega = idEntrega;
 	}
 
-	public VendaVO getIdVenda() {
+	public int getIdVenda() {
 		return idVenda;
 	}
 
-	public void setIdVenda(VendaVO idVenda) {
+	public void setIdVenda(int idVenda) {
 		this.idVenda = idVenda;
 	}
 
-	public UsuarioVO getIdEntregador() {
+	public int getIdEntregador() {
 		return idEntregador;
 	}
 
-	public void setIdEntregador(UsuarioVO idEntregador) {
+	public void setIdEntregador(int idEntregador) {
 		this.idEntregador = idEntregador;
 	}
 
@@ -63,4 +63,5 @@ public class EntregaVO {
 	public void setDataEntrega(LocalDateTime dataEntrega) {
 		this.dataEntrega = dataEntrega;
 	}
+	
 }

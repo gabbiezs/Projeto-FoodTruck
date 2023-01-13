@@ -57,9 +57,9 @@ public class UsuarioDAO {
 		Statement stmt = Banco.getStatement(conn);
 		ResultSet resultado = null;
 		ArrayList<TipoUsuarioVO> listaTipoUsuarioVO = new ArrayList<TipoUsuarioVO>();
-		String querry = "SELECT descricao FROM tipousuario";
+		String query = "SELECT descricao FROM tipousuario";
 		try {
-			resultado = stmt.executeQuery(querry);
+			resultado = stmt.executeQuery(query);
 			while(resultado.next()){
 				TipoUsuarioVO tipoUsuarioVO = TipoUsuarioVO.valueOf(resultado.getString(1));
 				listaTipoUsuarioVO.add(tipoUsuarioVO);
@@ -80,9 +80,9 @@ public class UsuarioDAO {
 		Statement stmt = Banco.getStatement(conn);
 		ResultSet resultado = null;
 		boolean retorno = false;
-		String querry = "SELECT cpf FROM usuario WHERE cpf = '" + usuarioVO.getCpf() + "' ";
+		String query = "SELECT cpf FROM usuario WHERE cpf = '" + usuarioVO.getCpf() + "' ";
 		try {
-			resultado = stmt.executeQuery(querry);
+			resultado = stmt.executeQuery(query);
 			if(resultado.next()){
 				retorno = true;
 			}
@@ -219,5 +219,119 @@ public class UsuarioDAO {
 			Banco.closeConnection(conn);
 		}
 		return retorno;
+	}
+
+	public ArrayList<UsuarioVO> consultarTodosUsuariosDAO() {
+		Connection conn = Banco.getConnection();
+		Statement stmt = Banco.getStatement(conn);
+		ResultSet resultado = null;
+		ArrayList<UsuarioVO> listaUsuarioVO = new ArrayList<UsuarioVO>();
+		String query = "SELECT u.idusuario, tipo.descricao, u.nome, u.cpf, u.email, u.telefone, u.datacadastro, u.dataexpiracao, u.login, u.senha "
+				+ "FROM usuario u, tipousuario tipo "
+				+ "WHERE u.idtipousuario = tipo.idtipousuario";
+		try {
+			resultado = stmt.executeQuery(query);
+			while(resultado.next()) {
+				UsuarioVO usuario = new UsuarioVO();
+				usuario.setIdUsuario(Integer.parseInt(resultado.getString(1)));
+				usuario.setTipoUsuario(TipoUsuarioVO.valueOf(resultado.getString(2)));
+				usuario.setNome(resultado.getString(3));
+				usuario.setCpf(resultado.getString(4));
+				usuario.setEmail(resultado.getString(5));
+				usuario.setTelefone(resultado.getString(6));
+				usuario.setDataCadastro(LocalDateTime.parse(resultado.getString(7), 
+						DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+				if(resultado.getString(8) != null) {
+					usuario.setDataExpiracao(LocalDateTime.parse(resultado.getString(8), 
+							DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+				}
+				usuario.setLogin(resultado.getString(9));
+				usuario.setSenha(resultado.getString(10));
+				listaUsuarioVO.add(usuario);
+			}
+		} catch (SQLException erro) {
+			System.out.println("Erro ao executar a query do método consultarTodosUsuariosDAO.");
+			System.out.println("Erro: " + erro.getMessage());
+		} finally {
+			Banco.closeResultSet(resultado);
+			Banco.closeStatement(stmt);
+			Banco.closeConnection(conn);
+		}
+		return listaUsuarioVO;
+	}
+
+	public UsuarioVO consultarUsuarioDAO(UsuarioVO usuarioVO) {
+		Connection conn = Banco.getConnection();
+		Statement stmt = Banco.getStatement(conn);
+		ResultSet resultado = null;
+		UsuarioVO usuario = new UsuarioVO();
+		String query = "SELECT u.idusuario, tipo.descricao, u.nome, u.cpf, u.email, u.telefone, u.datacadastro, u.dataexpiracao, u.login, u.senha "
+				+ "FROM usuario u, tipousuario tipo "
+				+ "WHERE u.idtipousuario = tipo.idtipousuario "
+				+ "AND u.idusuario = " + usuarioVO.getIdUsuario();
+		try {
+			resultado = stmt.executeQuery(query);
+			while(resultado.next()) {
+				usuario.setIdUsuario(Integer.parseInt(resultado.getString(1)));
+				usuario.setTipoUsuario(TipoUsuarioVO.valueOf(resultado.getString(2)));
+				usuario.setNome(resultado.getString(3));
+				usuario.setCpf(resultado.getString(4));
+				usuario.setEmail(resultado.getString(5));
+				usuario.setTelefone(resultado.getString(6));
+				usuario.setDataCadastro(LocalDateTime.parse(resultado.getString(7), 
+						DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+				if(resultado.getString(8) != null) {
+					usuario.setDataExpiracao(LocalDateTime.parse(resultado.getString(8), 
+							DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+				}
+				usuario.setLogin(resultado.getString(9));
+				usuario.setSenha(resultado.getString(10));
+			}
+		} catch (SQLException erro) {
+			System.out.println("Erro ao executar a query do método consultarUsuarioDAO.");
+			System.out.println("Erro: " + erro.getMessage());
+		} finally {
+			Banco.closeResultSet(resultado);
+			Banco.closeStatement(stmt);
+			Banco.closeConnection(conn);
+		}
+		return usuario;
+	}
+	
+	public ArrayList<UsuarioVO> consultarListaEntregadores() {
+		Connection conn = Banco.getConnection();
+		Statement stmt = Banco.getStatement(conn);
+		ResultSet resultado = null;
+		ArrayList<UsuarioVO> listaUsuariosVO = new ArrayList<UsuarioVO>();
+		String query = "SELECT u.idUsuario, tipo.descricao, u.nome, u.cpf, u.email, u.telefone, u.dataCadastro, u.dataExpiracao, u.login, u.senha "
+				+ "FROM usuario u, tipoUsuario tipo "
+				+ "WHERE u.idtipousuario = tipo.idtipousuario "
+				+ "AND u.dataExpiracao is NULL "
+				+ "AND tipo.descricao like '" + TipoUsuarioVO.ENTREGADOR.toString() + "'";
+		try {
+			resultado = stmt.executeQuery(query);
+			while(resultado.next()) {
+				UsuarioVO usuario = new UsuarioVO();
+				usuario.setIdUsuario(Integer.parseInt(resultado.getString(1)));
+				usuario.setTipoUsuario(TipoUsuarioVO.valueOf(resultado.getString(2)));
+				usuario.setNome(resultado.getString(3));
+				usuario.setCpf(resultado.getString(4));
+				usuario.setEmail(resultado.getString(5));
+				usuario.setTelefone(resultado.getString(6));
+				usuario.setDataCadastro(LocalDateTime.parse(resultado.getString(7), 
+						DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+				usuario.setLogin(resultado.getString(9));
+				usuario.setSenha(resultado.getString(10));
+				listaUsuariosVO.add(usuario);
+			}
+		} catch (SQLException erro) {
+			System.out.println("Erro ao executar a query do método consultarTodosUsuariosDAO.");
+			System.out.println("Erro: " + erro.getMessage());
+		} finally {
+			Banco.closeResultSet(resultado);
+			Banco.closeStatement(stmt);
+			Banco.closeConnection(conn);
+		}
+		return listaUsuariosVO;
 	}
 }

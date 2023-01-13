@@ -21,7 +21,7 @@ public class Menu {
 			switch(opcao) {
 				case OPCAO_MENU_VENDA:{
 					MenuVenda menuVenda = new MenuVenda();
-					menuVenda.apresentarMenuVenda();
+					menuVenda.apresentarMenuVenda(usuarioVO);
 					break;
 				}
 				case OPCAO_MENU_PRODUTO:{
@@ -36,7 +36,7 @@ public class Menu {
 					if (usuarioVO.getTipoUsuario().equals(TipoUsuarioVO.ADMINISTRADOR) 
 							|| usuarioVO.getTipoUsuario().equals(TipoUsuarioVO.FUNCIONARIO)) {
 						MenuRelatorio menuRelatorio = new MenuRelatorio();
-						menuRelatorio.apresentarMenuRelatorio(usuarioVO);
+						menuRelatorio.apresentarMenuRelatorio();
 					}
 					break;
 				}

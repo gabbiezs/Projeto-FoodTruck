@@ -3,11 +3,11 @@ package model.vo;
 public class ItemVendaVO {
 
 	private int idItemVenda;
-	private VendaVO idVenda;
-	private ProdutoVO idProduto;
+	private int idVenda;
+	private int idProduto;
 	private int quantidade;
 	
-	public ItemVendaVO(int idItemVenda, VendaVO idVenda, ProdutoVO idProduto, int quantidade) {
+	public ItemVendaVO(int idItemVenda, int idVenda, int idProduto, int quantidade) {
 		super();
 		this.idItemVenda = idItemVenda;
 		this.idVenda = idVenda;
@@ -17,6 +17,7 @@ public class ItemVendaVO {
 
 	public ItemVendaVO() {
 		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	public int getIdItemVenda() {
@@ -27,19 +28,19 @@ public class ItemVendaVO {
 		this.idItemVenda = idItemVenda;
 	}
 
-	public VendaVO getIdVenda() {
+	public int getIdVenda() {
 		return idVenda;
 	}
 
-	public void setIdVenda(VendaVO idVenda) {
+	public void setIdVenda(int idVenda) {
 		this.idVenda = idVenda;
 	}
 
-	public ProdutoVO getIdProduto() {
+	public int getIdProduto() {
 		return idProduto;
 	}
 
-	public void setIdProduto(ProdutoVO idProduto) {
+	public void setIdProduto(int idProduto) {
 		this.idProduto = idProduto;
 	}
 
@@ -50,4 +51,7 @@ public class ItemVendaVO {
 	public void setQuantidade(int quantidade) {
 		this.quantidade = quantidade;
 	}
+	
+	
+	
 }

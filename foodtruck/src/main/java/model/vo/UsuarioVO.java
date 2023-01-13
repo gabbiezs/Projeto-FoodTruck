@@ -1,6 +1,7 @@
 package model.vo;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class UsuarioVO {
 	
@@ -112,5 +113,28 @@ public class UsuarioVO {
 
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+
+	public void imprimir() {
+		System.out.printf("\n%3d  %-13s  %-20s  %-11s  %-25s  %-13s  %-24s  %-24s  %-10s  %-10s  ", 
+				this.getIdUsuario(),
+				this.getTipoUsuario(),
+				this.getNome(),
+				this.getCpf(),
+				this.getEmail(),
+				this.getTelefone(),
+				this.validarData(this.getDataCadastro()),
+				this.validarData(this.getDataExpiracao()),
+				this.getLogin(),
+				this.getSenha());
+		
+	}
+
+	private String validarData(LocalDateTime data) {
+		String resultado = "";
+		if(data != null) {
+			resultado = data.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"));
+		}
+		return resultado;
 	}
 }

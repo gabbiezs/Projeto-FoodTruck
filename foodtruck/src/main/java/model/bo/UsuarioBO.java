@@ -57,4 +57,22 @@ public class UsuarioBO {
 		}
 		return resultado;
 	}
+
+	public ArrayList<UsuarioVO> consultarTodosUsuariosBO() {
+		UsuarioDAO usuarioDAO = new UsuarioDAO();
+		ArrayList<UsuarioVO> listaUsuarioVO = usuarioDAO.consultarTodosUsuariosDAO();
+		if (listaUsuarioVO.isEmpty()) {
+			System.out.println("\nLista de usuários está vazia!");
+		}
+		return listaUsuarioVO;
+	}
+
+	public UsuarioVO consultarUsuarioBO(UsuarioVO usuarioVO) {
+		UsuarioDAO usuarioDAO = new UsuarioDAO();
+		UsuarioVO usuario = usuarioDAO.consultarUsuarioDAO(usuarioVO);
+		if(usuario == null) {
+			System.out.println("\nUsuário não localizado!");
+		}
+		return usuario;
+	}
 }

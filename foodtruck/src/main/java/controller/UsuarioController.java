@@ -33,4 +33,14 @@ public class UsuarioController {
 		return usuarioBO.atualizarUsuarioBO(usuarioVO);
 	}
 
+	public ArrayList<UsuarioVO> consultarTodosUsuariosController() {
+		UsuarioBO usuarioBO = new UsuarioBO();
+		return usuarioBO.consultarTodosUsuariosBO();
+	}
+
+	public UsuarioVO consultarUsuarioController(UsuarioVO usuarioVO) {
+		UsuarioBO usuarioBO = new UsuarioBO();
+		return usuarioBO.consultarUsuarioBO(usuarioVO);
+	}
+
 }

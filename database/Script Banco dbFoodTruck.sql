@@ -1,3 +1,7 @@
+/*create user 'relatorio'@'%' identified with mysql_native_password  by 'admin';
+grant all on DBFOODTRUCK.* to 'relatorio'@'%';
+flush privileges;*/
+
 DROP DATABASE IF EXISTS DBFOODTRUCK;
 CREATE DATABASE DBFOODTRUCK;
 
@@ -61,14 +65,15 @@ QUANTIDADE INT
 
 CREATE TABLE SITUACAOENTREGA (
 IDSITUACAOENTREGA INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-DESCRICAO VARCHAR(255)
+DESCRICAO VARCHAR(255),
+ORDEM INT
 );
 
 CREATE TABLE ENTREGA (
 IDENTREGA INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
 IDVENDA INT, FOREIGN KEY (IDVENDA) REFERENCES VENDA (IDVENDA),
 IDENTREGADOR INT, FOREIGN KEY (IDENTREGADOR) REFERENCES USUARIO (IDUSUARIO),
-IDSITUACAOENTREGA INT, FOREIGN KEY (IDSITUACAOENTREGA) REFERENCES SITUACAOENTREGA (IDSITUACAOENTREGA),
+SITUACAOENTREGA INT,
 DATAENTREGA DATETIME
 );
 
@@ -84,31 +89,37 @@ INSERT INTO TIPOPRODUTO (descricao) VALUES ('BEBIDA');
 INSERT INTO TIPOPRODUTO (descricao) VALUES ('SOBREMESA');
 
 
-INSERT INTO SITUACAOENTREGA (descricao) VALUES ('ENTREGA_CANCELADA');
-INSERT INTO SITUACAOENTREGA (descricao) VALUES ('PREPARANDO_PEDIDO');
-INSERT INTO SITUACAOENTREGA (descricao) VALUES ('EM_ROTA_DE_ENTREGA');
-INSERT INTO SITUACAOENTREGA (descricao) VALUES ('PEDIDO_ENTREGUE');
+INSERT INTO SITUACAOENTREGA (descricao, ordem) VALUES ('PEDIDO_REALIZADO', 1);
+INSERT INTO SITUACAOENTREGA (descricao, ordem) VALUES ('PREPARANDO_PEDIDO', 2);
+INSERT INTO SITUACAOENTREGA (descricao, ordem) VALUES ('EM_ROTA_DE_ENTREGA', 3);
+INSERT INTO SITUACAOENTREGA (descricao, ordem) VALUES ('PEDIDO_ENTREGUE', 4);
+INSERT INTO SITUACAOENTREGA (descricao, ordem) VALUES ('PEDIDO_CANCELADO', 8);
+INSERT INTO SITUACAOENTREGA (descricao, ordem) VALUES ('ENTREGA_CANCELADA', 9);
 
 
 
 
 INSERT INTO USUARIO (idtipousuario, nome, cpf, email, telefone, datacadastro, dataexpiracao, login, senha) 
-VALUES (1, 'Luis Alberto', '01234567890', 'beto@gmail.com', '91111-6666', '2022-10-01', null, 'luis', 'luis');
+VALUES (1, 'Luis Alberto', '01234567890', 'luis@gmail.com', '91111-6666', '2022-10-01', null, 'luis', 'luis');
 INSERT INTO USUARIO (idtipousuario, nome, cpf, email, telefone, datacadastro, dataexpiracao, login, senha) 
-VALUES (2, 'Gabriel  Miguel', '09876543210', 'gabriel@gmail.com', '91111-7777', '2022-10-01', null, 'cliente', 'cliente');
+VALUES (1, 'Gabriela Zanon', '01234567820', 'gabi@gmail.com', '91111-6666', '2022-10-01', null, 'gabi', 'gabi');
 INSERT INTO USUARIO (idtipousuario, nome, cpf, email, telefone, datacadastro, dataexpiracao, login, senha) 
-VALUES (3, 'Gabriela Zanon', '09876453210', 'gabriela@gmail.com', '91111-8888', '2022-10-01', null, 'func', 'func');
+VALUES (2, 'Jessica Melo', '09876543210', 'jessica@gmail.com', '91111-7777', '2022-10-01', null, 'cliente', 'cliente');
 INSERT INTO USUARIO (idtipousuario, nome, cpf, email, telefone, datacadastro, dataexpiracao, login, senha) 
-VALUES (4, 'Renan Leal', '09873456210', 'renan@gmail.com', '91111-9999', '2022-10-01', null, 'entregador', 'entregador');
+VALUES (3, 'Bruna Melo', '09876453210', 'bruna@gmail.com', '91111-8888', '2022-10-01', null, 'func', 'func');
 INSERT INTO USUARIO (idtipousuario, nome, cpf, email, telefone, datacadastro, dataexpiracao, login, senha) 
-VALUES (4, 'Barbara Luersen', '09875634210', 'barbara@gmail.com', '92222-9999', '2022-10-01', null, 'entregador', 'entregador');
+VALUES (4, 'Roberto Melo', '09873456210', 'roberto@gmail.com', '91111-9999', '2022-10-01', null, 'entregador', 'entregador');
+INSERT INTO USUARIO (idtipousuario, nome, cpf, email, telefone, datacadastro, dataexpiracao, login, senha) 
+VALUES (4, 'Fernanda Melo', '09875634210', 'fernanda@gmail.com', '92222-9999', '2022-10-01', null, 'entregador', 'entregador');
 
 INSERT INTO PRODUTO (idtipoproduto, nome, preco, datacadastro, dataexclusao) VALUES (1, 'Pizza', 50.00, '2022-10-01', null);
 INSERT INTO PRODUTO (idtipoproduto, nome, preco, datacadastro, dataexclusao) VALUES (2, 'Coca-Cola', 7.00, '2022-10-01', null);
 INSERT INTO PRODUTO (idtipoproduto, nome, preco, datacadastro, dataexclusao) VALUES (3, 'Sorvete', 15.00, '2022-10-01', null);
 
-INSERT INTO VENDA (idusuario, numeropedido, datavenda, datacancelamento, flagentrega, taxaentrega) VALUES (2, 1, '2022-11-03', null, 0, null);
-INSERT INTO VENDA (idusuario, numeropedido, datavenda, datacancelamento, flagentrega, taxaentrega) VALUES (2, 1, '2022-11-04', null, 1, 10.00);
+INSERT INTO VENDA (idusuario, numeropedido, datavenda, datacancelamento, flagentrega, taxaentrega) VALUES (3, 1, '2022-11-03', null, 0, null);
+INSERT INTO VENDA (idusuario, numeropedido, datavenda, datacancelamento, flagentrega, taxaentrega) VALUES (3, 2, '2022-11-04', null, 1, 10.00);
+INSERT INTO VENDA (idusuario, numeropedido, datavenda, datacancelamento, flagentrega, taxaentrega) VALUES (3, 3, '2022-11-28 14:20:00', '2022-11-28 14:30:00', 1, 14.25);
+INSERT INTO VENDA (idusuario, numeropedido, datavenda, datacancelamento, flagentrega, taxaentrega) VALUES (3, 4, '2022-11-29 15:30:00', null, 1, 5.80);
 
 INSERT INTO ITEMVENDA (idvenda, idproduto, quantidade) VALUES (1, 1, 2);
 INSERT INTO ITEMVENDA (idvenda, idproduto, quantidade) VALUES (1, 2, 2);
@@ -117,9 +128,16 @@ INSERT INTO ITEMVENDA (idvenda, idproduto, quantidade) VALUES (2, 1, 1);
 INSERT INTO ITEMVENDA (idvenda, idproduto, quantidade) VALUES (2, 2, 2);
 INSERT INTO ITEMVENDA (idvenda, idproduto, quantidade) VALUES (2, 3, 2);
 
-INSERT INTO ENTREGA (idvenda, identregador, idsituacaoentrega, dataentrega) VALUES (2, 4, 3, '2022-11-04 21:00:00'); 
+INSERT INTO ITEMVENDA (idvenda, idproduto, quantidade) VALUES (3, 1, 5);
+INSERT INTO ITEMVENDA (idvenda, idproduto, quantidade) VALUES (3, 2, 5);
 
+INSERT INTO ITEMVENDA (idvenda, idproduto, quantidade) VALUES (4, 2, 3);
+INSERT INTO ITEMVENDA (idvenda, idproduto, quantidade) VALUES (4, 3, 3);
+INSERT INTO ITEMVENDA (idvenda, idproduto, quantidade) VALUES (4, 1, 1);
 
+INSERT INTO ENTREGA (idvenda, identregador, situacaoentrega, dataentrega) VALUES (2, 4, 4, '2022-11-04 21:00:00'); 
+INSERT INTO ENTREGA (idvenda, identregador, situacaoentrega, dataentrega) VALUES (3, 5, 8, null); 
+INSERT INTO ENTREGA (idvenda, identregador, situacaoentrega, dataentrega) VALUES (4, 4, 9, null); 
 
 SELECT * FROM TIPOUSUARIO;
 
@@ -137,3 +155,107 @@ SELECT * FROM ENTREGA;
 
 SELECT * FROM SITUACAOENTREGA;
 
+
+select u.nome as NOME, 
+	v.datacancelamento as DATA_CANCELAMENTO, 
+	(select sum(p.preco * itv.quantidade) 
+		from itemvenda itv, produto p
+		where itv.idvenda = v.idvenda
+		and itv.idproduto = p.idproduto
+		group by idvenda) as SUBTOTAL, 
+    v.taxaentrega as TAXA_ENTREGA, 
+    (v.taxaentrega + (select sum(p.preco * itv.quantidade) 
+						from itemvenda itv, produto p
+						where itv.idvenda = v.idvenda
+						and itv.idproduto = p.idproduto
+						group by idvenda)) as TOTAL
+from usuario u, venda v
+where v.idusuario = u.idusuario
+and v.datacancelamento is not null;
+
+
+-- Relatório 1
+SELECT 
+	VENDA.IDVENDA
+		, DATE_FORMAT(VENDA.DATAVENDA, '%d/%m/%Y') AS DATAVENDA
+		, VENDA.NOMECLIENTE 
+		, IFNULL(SITUACAOENTREGA.DESCRICAO, 'EM LANÇAMENTO') AS DESCRICACOSITUACAO
+		, VENDA.IDPRODUTO
+		, VENDA.NOME
+		, VENDA.QUANTIDADE
+		, VENDA.PRECO
+FROM (
+    SELECT
+		VENDA.IDVENDA
+		, VENDA.DATAVENDA
+		, USUARIO.NOME AS NOMECLIENTE 
+		, MAX(ENTREGA.IDENTREGA) AS IDENTREGA
+		, PRODUTO.IDPRODUTO
+		, PRODUTO.NOME
+		, ITEMVENDA.QUANTIDADE
+		, PRODUTO.PRECO
+	FROM
+		VENDA
+		INNER JOIN ITEMVENDA ON 
+		VENDA.IDVENDA = ITEMVENDA.IDVENDA
+		INNER JOIN PRODUTO ON
+		PRODUTO.IDPRODUTO = ITEMVENDA.IDPRODUTO
+		LEFT JOIN ENTREGA ON
+		ENTREGA.IDVENDA = VENDA.IDVENDA
+		LEFT JOIN USUARIO ON
+		USUARIO.IDUSUARIO = VENDA.IDUSUARIO
+	GROUP BY
+		VENDA.IDVENDA
+		, VENDA.DATAVENDA
+		, PRODUTO.IDPRODUTO
+		, PRODUTO.NOME
+		, ITEMVENDA.QUANTIDADE
+		, PRODUTO.PRECO
+	) AS VENDA
+    LEFT JOIN ENTREGA ON
+    VENDA.IDENTREGA = ENTREGA.IDENTREGA
+    LEFT JOIN SITUACAOENTREGA ON
+    SITUACAOENTREGA.ORDEM = ENTREGA.SITUACAOENTREGA
+ORDER BY
+	IDVENDA, IDPRODUTO
+;
+
+-- Relatório 2
+SELECT
+    VENDA.IDVENDA
+    , VENDA.DATAVENDA
+    , USUARIO.NOME AS NOMECLIENTE
+    , USUARIO.TELEFONE AS TELEFONECLIENTE
+    , ENTREGA.DATAENTREGA
+    , ENTREGADOR.NOME AS NOMEENTREGADOR
+    , ENTREGADOR.TELEFONE AS TELEFONEENTREGADOR
+    , SITUACAOENTREGA.DESCRICAO
+    , CAST(IFNULL(SITUACAOENTREGA.ORDEM, 0) AS UNSIGNED) AS ORDEM
+FROM
+    VENDA
+    LEFT JOIN USUARIO ON
+    USUARIO.IDUSUARIO = VENDA.IDUSUARIO
+    LEFT JOIN ENTREGA ON
+    ENTREGA.IDVENDA = VENDA.IDVENDA
+    LEFT JOIN SITUACAOENTREGA ON
+    SITUACAOENTREGA.ORDEM = ENTREGA.SITUACAOENTREGA
+    LEFT JOIN USUARIO AS ENTREGADOR ON
+    ENTREGADOR.IDUSUARIO = ENTREGA.IDENTREGADOR
+WHERE
+    VENDA.IDVENDA = 2
+ORDER BY
+    SITUACAOENTREGA.ORDEM;
+
+
+SELECT 
+	PRODUTO.IDPRODUTO
+	, PRODUTO.NOME
+	, ITEMVENDA.QUANTIDADE
+FROM
+	ITEMVENDA 
+	INNER JOIN PRODUTO ON
+	PRODUTO.IDPRODUTO = ITEMVENDA.IDPRODUTO
+WHERE
+	ITEMVENDA.IDVENDA = 3
+ORDER BY 
+	PRODUTO.IDPRODUTO;

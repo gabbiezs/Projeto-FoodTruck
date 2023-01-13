@@ -1,22 +1,25 @@
 package model.vo;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 public class VendaVO {
 
 	private int idVenda;
-	private UsuarioVO idUsuario;
+	private int idUsuario;
+	private ArrayList<ItemVendaVO> listaItemVendaVO;
 	private int numeroPedido;
 	private LocalDateTime dataVenda;
 	private LocalDateTime dataCancelamento;
 	private boolean flagEntrega;
 	private double taxaEntrega;
 	
-	public VendaVO(int idVenda, UsuarioVO idUsuario, int numeroPedido, LocalDateTime dataVenda,
-			LocalDateTime dataCancelamento, boolean flagEntrega, double taxaEntrega) {
+	public VendaVO(int idVenda, int idUsuario, ArrayList<ItemVendaVO> listaItemVendaVO, int numeroPedido,
+			LocalDateTime dataVenda, LocalDateTime dataCancelamento, boolean flagEntrega, double taxaEntrega) {
 		super();
 		this.idVenda = idVenda;
 		this.idUsuario = idUsuario;
+		this.listaItemVendaVO = listaItemVendaVO;
 		this.numeroPedido = numeroPedido;
 		this.dataVenda = dataVenda;
 		this.dataCancelamento = dataCancelamento;
@@ -36,12 +39,20 @@ public class VendaVO {
 		this.idVenda = idVenda;
 	}
 
-	public UsuarioVO getIdUsuario() {
+	public int getIdUsuario() {
 		return idUsuario;
 	}
 
-	public void setIdUsuario(UsuarioVO idUsuario) {
+	public void setIdUsuario(int idUsuario) {
 		this.idUsuario = idUsuario;
+	}
+
+	public ArrayList<ItemVendaVO> getListaItemVendaVO() {
+		return listaItemVendaVO;
+	}
+
+	public void setListaItemVendaVO(ArrayList<ItemVendaVO> listaItemVendaVO) {
+		this.listaItemVendaVO = listaItemVendaVO;
 	}
 
 	public int getNumeroPedido() {
@@ -68,7 +79,7 @@ public class VendaVO {
 		this.dataCancelamento = dataCancelamento;
 	}
 
-	public boolean getFlagEntrega() {
+	public boolean isFlagEntrega() {
 		return flagEntrega;
 	}
 
@@ -83,4 +94,5 @@ public class VendaVO {
 	public void setTaxaEntrega(double taxaEntrega) {
 		this.taxaEntrega = taxaEntrega;
 	}
+	
 }

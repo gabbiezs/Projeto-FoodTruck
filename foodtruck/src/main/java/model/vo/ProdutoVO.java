@@ -1,6 +1,8 @@
 package model.vo;
 
+import java.text.DecimalFormat;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class ProdutoVO {
 
@@ -72,5 +74,24 @@ public class ProdutoVO {
 
 	public void setDataExclusao(LocalDateTime dataExclusao) {
 		this.dataExclusao = dataExclusao;
+	}
+
+	public void imprimir() {
+		DecimalFormat df = new DecimalFormat("0.00");
+		System.out.printf("\n%3s  %-13s  %-20s  %-7s  %-24s  %-24s  ", 
+				this.getIdProduto(),
+				this.getTipoProduto(),
+				this.getNome(),
+				df.format(this.getPreco()),
+				this.validarData(this.getDataCadastro()),
+				this.validarData(this.getDataExclusao()));
+	}
+
+	private String validarData(LocalDateTime data) {
+		String resultado = "";
+		if(data != null) {
+			resultado = data.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"));
+		}
+		return resultado;
 	}
 }
