@@ -1,11 +1,12 @@
 package model.vo;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class UsuarioVO {
 	
 	private int idUsuario;
-	private TipoUsuarioVo tipoUsuario;
+	private TipoUsuarioVO tipoUsuario;
 	private String nome;
 	private String cpf;
 	private String email;
@@ -15,7 +16,7 @@ public class UsuarioVO {
 	private String login;
 	private String senha;
 	
-	public UsuarioVO(int idUsuario, TipoUsuarioVo tipoUsuario, String nome, String cpf, String email, String telefone,
+	public UsuarioVO(int idUsuario, TipoUsuarioVO tipoUsuario, String nome, String cpf, String email, String telefone,
 			LocalDateTime dataCadastro, LocalDateTime dataExpiracao, String login, String senha) {
 		super();
 		this.idUsuario = idUsuario;
@@ -42,11 +43,11 @@ public class UsuarioVO {
 		this.idUsuario = idUsuario;
 	}
 
-	public TipoUsuarioVo getTipoUsuario() {
+	public TipoUsuarioVO getTipoUsuario() {
 		return tipoUsuario;
 	}
 
-	public void setTipoUsuario(TipoUsuarioVo tipoUsuario) {
+	public void setTipoUsuario(TipoUsuarioVO tipoUsuario) {
 		this.tipoUsuario = tipoUsuario;
 	}
 
@@ -113,6 +114,27 @@ public class UsuarioVO {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-	
-	
+
+	public void imprimir() {
+		System.out.printf("\n%3d  %-13s  %-20s  %-11s  %-25s  %-13s  %-24s  %-24s  %-10s  %-10s  ", 
+				this.getIdUsuario(),
+				this.getTipoUsuario(),
+				this.getNome(),
+				this.getCpf(),
+				this.getEmail(),
+				this.getTelefone(),
+				this.validarData(this.getDataCadastro()),
+				this.validarData(this.getDataExpiracao()),
+				this.getLogin(),
+				this.getSenha());
+		
+	}
+
+	private String validarData(LocalDateTime data) {
+		String resultado = "";
+		if(data != null) {
+			resultado = data.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"));
+		}
+		return resultado;
+	}
 }
